@@ -17,6 +17,7 @@
 #include "lv_drivers/display/monitor.h"
 #include "lv_drivers/indev/mouse.h"
 #include "lv_examples/lv_examples.h"
+#include <ST7789_240x240.h>
 
 /*********************
  *      DEFINES
@@ -56,8 +57,10 @@ int main(int argc, char **argv)
 
   /*Initialize the HAL (display, input devices, tick) for LVGL*/
   hal_init();
-
-  lv_demo_widgets();
+  ST7789_240x240::getInstance().setCurrentTemperature(12.5);
+    ST7789_240x240::getInstance().setCurrentHumidity(75.4);
+    ST7789_240x240::getInstance().setCurrentAirPressure(1010.5);
+//  lv_demo_widgets();
 //  lv_demo_printer();
 
   while (1) {
