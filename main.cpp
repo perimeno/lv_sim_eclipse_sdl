@@ -57,17 +57,25 @@ int main(int argc, char **argv)
 
   /*Initialize the HAL (display, input devices, tick) for LVGL*/
   hal_init();
-  ST7789_240x240::getInstance().setCurrentTemperature(12.5);
-    ST7789_240x240::getInstance().setCurrentHumidity(75.4);
-    ST7789_240x240::getInstance().setCurrentAirPressure(1010.5);
+
+
+
 //  lv_demo_widgets();
 //  lv_demo_printer();
-
+float t=5.1;
+float h=-1.5;
+float p=989.5;
   while (1) {
     /* Periodically call the lv_task handler.
      * It could be done in a timer interrupt or an OS task too.*/
     lv_task_handler();
-    usleep(5 * 1000);
+    ST7789_240x240::getInstance().setCurrentTemperature(t);
+    ST7789_240x240::getInstance().setCurrentHumidity(h);
+    ST7789_240x240::getInstance().setCurrentAirPressure(p);
+    t-=0.1;
+    h+=0.9;
+    p+=0.9;
+    usleep(150*1000);
   }
 
   return 0;
