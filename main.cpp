@@ -65,6 +65,11 @@ int main(int argc, char **argv)
 float t=5.1;
 float h=-1.5;
 float p=989.5;
+uint8_t b=0;
+char nameBuff[64];
+bool bdir=true;
+sprintf(nameBuff,"Ez az én eszközöm neve: úÚŐÜŰÁŰ");
+ST7789_240x240::getInstance().setDeviceName(nameBuff);
   while (1) {
     /* Periodically call the lv_task handler.
      * It could be done in a timer interrupt or an OS task too.*/
@@ -72,6 +77,19 @@ float p=989.5;
     ST7789_240x240::getInstance().setCurrentTemperature(t);
     ST7789_240x240::getInstance().setCurrentHumidity(h);
     ST7789_240x240::getInstance().setCurrentAirPressure(p);
+    ST7789_240x240::getInstance().setBatteryLevel(b);
+    ST7789_240x240::getInstance().setSignalStrength(b);
+    if(b==0){
+        bdir=true;
+    }
+    else if(b==101){
+        bdir=false;
+    }
+    if(bdir)
+        ++b;
+    else
+        --b;
+
     t-=0.1;
     h+=0.9;
     p+=0.9;
